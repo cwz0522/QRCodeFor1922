@@ -32,7 +32,7 @@ jobs:
       - uses: eskatos/gradle-command-action@v1.3.3
         with:
           gradle-version: 6.5
-          arguments: build --scan
+          arguments: assembleRelease
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
