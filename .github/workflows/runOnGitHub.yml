@@ -30,8 +30,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Check if Git tag exists
-        run: echo "HEAD_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
-        run: echo "LANG=zh_TW.UTF-8" >> $GITHUB_ENV
+        run: |
+          echo "HEAD_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
+          echo "LANG=zh_TW.UTF-8" >> $GITHUB_ENV
 
       - name: Runs only if Git tag exists
         run: echo "This runs because Git tag points at HEAD ..."
