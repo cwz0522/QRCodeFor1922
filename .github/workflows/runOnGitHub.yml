@@ -64,9 +64,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
 
       - name: Save name of our Artifact
         id: set-result-artifact
@@ -85,9 +85,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ env.ARTIFACT_PATHNAME_APK }}
-        asset_name: ${{ env.ARTIFACT_NAME_APK }}
-        asset_content_type: application/zip
+          asset_path: ${{ env.ARTIFACT_PATHNAME_APK }}
+          asset_name: ${{ env.ARTIFACT_NAME_APK }}
+          asset_content_type: application/zip
 
           
       # Runs a single command using the runners shell
