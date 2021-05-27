@@ -7,6 +7,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
+    tags: [ v*]
   pull_request:
     branches: [ main ]
 
@@ -24,6 +25,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: Check if Git tag exists
+        run: echo "::set-env name=HEAD_TAG::$(git tag --points-at HEAD)"
+
+      - name: Runs only if Git tag exists
+        run: echo "This runs because Git tag points at HEAD ..."
+        if: env.HEAD_TAG != ''
 
       - uses: actions/setup-java@v2.1.0
         with:
@@ -63,6 +71,7 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        if: env.HEAD_TAG != ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -81,6 +90,7 @@ jobs:
           echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
           echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
           echo "ARTIFACT_NAME_APK=${ARTIFACT_NAME_APK}" >> $GITHUB_ENV
+        if: env.HEAD_TAG != ''
 
       - name: Upload our Artifact Assets
         id: upload-release-asset
@@ -92,6 +102,7 @@ jobs:
           asset_path: ${{ env.ARTIFACT_PATHNAME_APK }}
           asset_name: ${{ env.ARTIFACT_NAME_APK }}
           asset_content_type: application/zip
+        if: env.HEAD_TAG != ''
 
           
       # Runs a single command using the runners shell
