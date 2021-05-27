@@ -36,6 +36,11 @@ jobs:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
+
+      - uses: actions/upload-artifact@v2.2.3
+          #          with:
+          #            name: Release artifact
+          #            path: app/build/outputs/apk/ourbuildtype/release/app-artifact-*.apk
           
       # Runs a single command using the runners shell
       - name: Run a one-line script
