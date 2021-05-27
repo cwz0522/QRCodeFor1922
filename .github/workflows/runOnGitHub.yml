@@ -14,9 +14,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  LANG: "zh_TW.UTF-8"
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -32,7 +29,6 @@ jobs:
       - name: Check if Git tag exists
         run: |
           echo "HEAD_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
-          echo "LANG=zh_TW.UTF-8" >> $GITHUB_ENV
 
       - name: Runs only if Git tag exists
         run: echo "This runs because Git tag points at HEAD ..."
@@ -90,7 +86,7 @@ jobs:
         run: |
           #ARTIFACT_PATHNAME_APK=$(ls app/build/outputs/apk/ourbuildtype/release/*.apk | head -n 1)
           ARTIFACT_PATHNAME_APK=${{steps.sign_app.outputs.signedReleaseFile}}
-          ARTIFACT_NAME_APK="自製實聯制掃描器_${{ env.TAG }}.apk"
+          ARTIFACT_NAME_APK="QRCodeFor1922_${{ env.TAG }}.apk"
           #          echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
           echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
           echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
