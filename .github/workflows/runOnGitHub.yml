@@ -85,7 +85,7 @@ jobs:
         run: |
           #ARTIFACT_PATHNAME_APK=$(ls app/build/outputs/apk/ourbuildtype/release/*.apk | head -n 1)
           ARTIFACT_PATHNAME_APK=${{steps.sign_app.outputs.signedReleaseFile}}
-          ARTIFACT_NAME_APK=自製實聯制掃描器_${{ env.TAG }}.apk
+          ARTIFACT_NAME_APK="自製實聯制掃描器_${{ env.TAG }}.apk"
           #          echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
           echo "ARTIFACT_NAME_APK is " ${ARTIFACT_NAME_APK}
           echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
